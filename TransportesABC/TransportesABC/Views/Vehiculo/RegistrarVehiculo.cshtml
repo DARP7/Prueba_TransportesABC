@@ -1,0 +1,122 @@
+﻿@model TransportesABC.Models.Auto
+
+@{
+    ViewBag.Title = "RegistrarVehiculo";
+}
+
+
+
+
+
+@using (Html.BeginForm("RegistrarVehiculo", "Vehiculo", FormMethod.Post))
+{
+
+<div>
+    <h1>Registra un Vehiculo en la Solicitud de Transporte</h1>
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Marca">Marca:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Marca" name="Marca" type="text" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Modelo">Modelo</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Modelo" name="Modelo" type="text" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Folio">Folio:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Folio" name="Folio" type="number" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Color">Color:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Color" name="Color" type="text" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Transmision">Transmision:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Transmision" name="Transmision" type="text" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="DescripcionEstetica">Descripcion:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="DescripcionEstetica" name="DescripcionEstetica" type="text" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="AutoSolicitudID">Solicitud:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="AutoSolicitudID" name="AutoSolicitudID" type="number" value=@Model.AutoSolicitudID readonly>
+        </div>
+    </div>
+    <div>
+        <br />
+    </div>
+    <div>
+        <br />
+    </div>
+    <div>
+        <input type="submit" value="Registrar" />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Regresa al Inicio", "Index", "Home")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

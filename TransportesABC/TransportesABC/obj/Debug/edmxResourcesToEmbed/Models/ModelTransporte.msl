@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TransporteModelStoreContainer" CdmEntityContainer="TransporteEntities">
+    <EntitySetMapping Name="Auto">
+      <EntityTypeMapping TypeName="TransporteModel.Auto">
+        <MappingFragment StoreEntitySet="Auto">
+          <ScalarProperty Name="AutoID" ColumnName="AutoID" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Transmision" ColumnName="Transmision" />
+          <ScalarProperty Name="DescripcionEstetica" ColumnName="DescripcionEstetica" />
+          <ScalarProperty Name="AutoSolicitudID" ColumnName="AutoSolicitudID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Solicitud_Transporte">
+      <EntityTypeMapping TypeName="TransporteModel.Solicitud_Transporte">
+        <MappingFragment StoreEntitySet="Solicitud_Transporte">
+          <ScalarProperty Name="SolicitudID" ColumnName="SolicitudID" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="NumeroLote" ColumnName="NumeroLote" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Agregar_Auto" FunctionName="TransporteModel.Store.Agregar_Auto" />
+    <FunctionImportMapping FunctionImportName="Editar_Auto" FunctionName="TransporteModel.Store.Editar_Auto" />
+    <FunctionImportMapping FunctionImportName="Mostrar_Autos" FunctionName="TransporteModel.Store.Mostrar_Autos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TransporteModel.Mostrar_Autos_Result">
+          <ScalarProperty Name="AutoID" ColumnName="AutoID" />
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Transmision" ColumnName="Transmision" />
+          <ScalarProperty Name="DescripcionEstetica" ColumnName="DescripcionEstetica" />
+          <ScalarProperty Name="AutoSolicitudID" ColumnName="AutoSolicitudID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Mostrar_Autos_Blancos" FunctionName="TransporteModel.Store.Mostrar_Autos_Blancos">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="TransporteModel.Mostrar_Autos_Blancos_Result">
+          <ScalarProperty Name="Marca" ColumnName="Marca" />
+          <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="Registro_Solicitud" FunctionName="TransporteModel.Store.Registro_Solicitud" />
+  </EntityContainerMapping>
+</Mapping>

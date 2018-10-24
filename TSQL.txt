@@ -1,0 +1,116 @@
+crear tabla ------------------------------------
+
+CREATE DATABASE TransportesABC
+GO
+
+------------------------------------------------
+
+usar base de datos -----------------------------
+
+USE TransportesABC
+GO
+
+------------------------------------------------
+
+crear tablas -----------------------------------
+
+---Solicitud_Transporte
+CREATE TABLE dbo.Solicitud_Transporte
+	(SolicitudID int PRIMARY KEY NOT NULL IDENTITY(1,1),
+	Fecha date NOT NULL,
+	NumeroLote int NOT NULL)
+GO
+-----------------------------------
+
+---Auto
+CREATE TABLE dbo.Auto
+	(AutoID int PRIMARY KEY NOT NULL IDENTITY(1,1),
+	Marca varchar(50) NOT NULL,
+	Modelo varchar(50) NOT NULL,
+	Folio int NOT NULL,
+	Color varchar(50),
+	Transmision varchar(50),
+	DescripcionEstetica varchar(250),
+	AutoSolicitudID int NOT NULL,
+	CONSTRAINT FK_Transporte_AutoSolicitudID FOREIGN KEY (AutoSolicitudID)
+	REFERENCES dbo.Solicitud_Transporte (SolicitudID)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE);
+GO
+-----------------------------------
+------------------------------------------------
+
+CREAR PROCEDIMIENTOS ALMACENADOS-------------------------------
+
+Registro de solicitud de transporte--------------
+CREATE PROCEDURE Registro_Solicitud
+@Fecha date,
+@Lote int
+	AS
+	BEGIN
+		INSERT dbo.Solicitud_Transporte(Fecha, NumeroLote)
+		VALUES (@Fecha, @Lote);
+	END
+GO
+-------------------------------------------------
+
+Registro de auto en solicitud--------------
+CREATE PROCEDURE Agregar_Auto
+@Marca varchar(50),
+@Modelo varchar(50),
+@Folio int,
+@Color varchar(50),
+@Transmision varchar(50),
+@Descripcion varchar(250),
+@Solicitud int
+	AS
+	BEGIN
+		INSERT dbo.Auto(Marca, Modelo, Folio, Color, Transmision, DescripcionEstetica, AutoSolicitudID)
+		VALUES (@Marca, @Modelo, @Folio, @Color, @Transmision, @Descripcion, @Solicitud);
+	END
+GO
+-------------------------------------------------
+
+Mostrar los autos de determinada solicitud--------------
+CREATE PROCEDURE Mostrar_Autos
+@Solicitud int
+	AS
+	BEGIN
+		SELECT * FROM Auto
+		WHERE AutoSolicitudID=@Solicitud;
+	END
+GO
+-------------------------------------------------
+
+Editar los autos--------------
+CREATE PROCEDURE Editar_Auto
+@AutoID int,
+@Marca varchar(50),
+@Modelo varchar(50),
+@Folio int,
+@Color varchar(50),
+@Transmision varchar(50),
+@Descripcion varchar(250)
+	AS
+	BEGIN
+		UPDATE dbo.Auto
+		SET Marca=@Marca, Modelo=@Modelo, Folio=@Folio, Color=@Color, Transmision=@Transmision, DescripcionEstetica=@Descripcion
+		WHERE AutoID=@AutoID;
+	END
+GO
+-------------------------------------------------
+
+Mostrar cantidad de autos Agrupados por marca y modelo ordenados por folio donde el color sea blanco--------------
+CREATE PROCEDURE Mostrar_Autos_Blancos
+	AS
+	BEGIN
+		SELECT Marca, Modelo, Folio, count(*) AS Cantidad
+		FROM Auto
+		WHERE Color='blanco'
+		GROUP BY Marca, Modelo, Folio
+		ORDER BY Folio;
+	END
+GO
+-------------------------------------------------
+
+---------------------------------------------------------------//FIN CREAR PROCEDIMIENTOS ALMACENADOS

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TransportesABC.Models.Solicitud_Transporte>
+
+@{
+    ViewBag.Title = "MostrarSolicitudes";
+}
+
+<h2>MostrarSolicitudes</h2>
+
+<p>
+    @Html.ActionLink("Registra una Solicitud", "RegistroSolicitud", "Home")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroLote)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroLote)
+        </td>
+        <td>
+            @Html.ActionLink("Registra Vehiculo", "RegistrarVehiculo", "Vehiculo", new { id = item.SolicitudID }, null) |
+            @Html.ActionLink("Mostrar Vehiculos", "MostrarVehiculos", "Vehiculo", new { id = item.SolicitudID }, null)
+        </td>
+    </tr>
+}
+
+</table>

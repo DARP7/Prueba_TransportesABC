@@ -1,0 +1,62 @@
+﻿@model TransportesABC.Models.Solicitud_Transporte
+
+@{
+    ViewBag.Title = "RegistroSolicitud";
+}
+
+<h2>RegistroSolicitud</h2>
+
+
+@using (Html.BeginForm("RegistroSolicitud", "Home", FormMethod.Post))
+{
+
+<div>
+    <h1>Registra una Solicitud de Transporte de Autos</h1>
+    <br />
+    <br />
+    <br />
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="Fecha">Fecha:</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="Fecha" name="Fecha" type="date" value="YYYY-MM-DD">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label for="NumeroLote">Numero de Lote</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+            <input id="NumeroLote" name="NumeroLote" type="number" value="">
+        </div>
+    </div>
+    <div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+    <div>
+        <input type="submit" value="Registrar" />
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+            <label class="label-success">@ViewBag.SuccessMessage</label>
+        </div>
+    </div>
+</div>
+}
+<div>
+    @Html.ActionLink("Regresa al inicio", "Index")
+</div>
+<div>
+    @Html.ActionLink("Mostrar los Registros de Solicitudes", "MostrarSolicitudes", "Solicitudes")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

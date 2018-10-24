@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TransporteModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Auto">
+    <Key>
+      <PropertyRef Name="AutoID" />
+    </Key>
+    <Property Name="AutoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Marca" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Folio" Type="int" Nullable="false" />
+    <Property Name="Color" Type="varchar" MaxLength="50" />
+    <Property Name="Transmision" Type="varchar" MaxLength="50" />
+    <Property Name="DescripcionEstetica" Type="varchar" MaxLength="250" />
+    <Property Name="AutoSolicitudID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Solicitud_Transporte">
+    <Key>
+      <PropertyRef Name="SolicitudID" />
+    </Key>
+    <Property Name="SolicitudID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="NumeroLote" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Transporte_AutoSolicitudID">
+    <End Role="Solicitud_Transporte" Type="Self.Solicitud_Transporte" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Auto" Type="Self.Auto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Solicitud_Transporte">
+        <PropertyRef Name="SolicitudID" />
+      </Principal>
+      <Dependent Role="Auto">
+        <PropertyRef Name="AutoSolicitudID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="Agregar_Auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Marca" Type="varchar" Mode="In" />
+    <Parameter Name="Modelo" Type="varchar" Mode="In" />
+    <Parameter Name="Folio" Type="int" Mode="In" />
+    <Parameter Name="Color" Type="varchar" Mode="In" />
+    <Parameter Name="Transmision" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+    <Parameter Name="Solicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Editar_Auto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AutoID" Type="int" Mode="In" />
+    <Parameter Name="Marca" Type="varchar" Mode="In" />
+    <Parameter Name="Modelo" Type="varchar" Mode="In" />
+    <Parameter Name="Folio" Type="int" Mode="In" />
+    <Parameter Name="Color" Type="varchar" Mode="In" />
+    <Parameter Name="Transmision" Type="varchar" Mode="In" />
+    <Parameter Name="Descripcion" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Mostrar_Autos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Solicitud" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Mostrar_Autos_Blancos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="Registro_Solicitud" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Fecha" Type="date" Mode="In" />
+    <Parameter Name="Lote" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="TransporteModelStoreContainer">
+    <EntitySet Name="Auto" EntityType="Self.Auto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Solicitud_Transporte" EntityType="Self.Solicitud_Transporte" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Transporte_AutoSolicitudID" Association="Self.FK_Transporte_AutoSolicitudID">
+      <End Role="Solicitud_Transporte" EntitySet="Solicitud_Transporte" />
+      <End Role="Auto" EntitySet="Auto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
